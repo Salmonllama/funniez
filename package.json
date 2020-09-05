@@ -2,19 +2,30 @@
   "name": "funniez",
   "version": "0.1.0",
   "private": true,
+  "main": "src/main.js",
+  "homepage": "./",
+  "productName": "Funniez",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.20.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-dev": "ELECTRON_START_URL=http://localhost:3000 electron .",
+    "electron-prebuild": "mkdir -p build/src && mkdir -p build/src/endpoints && cp -R src/main.js build/src && cp -R src/endpoints/icanhazdadjoke.js build/src/endpoints",
+    "electron-package": "npm run build && npm run electron-prebuild && electron-builder build --mac --win --linux -c.extraMetadata.main=build/src/main.js --publish never"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +41,21 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^10.1.1",
+    "electron-builder": "^22.8.0"
+  },
+  "build": {
+    "appId": "dev.salmonllama.funniez",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "publish": {
+      "provider": "github",
+      "repo": "tbd",
+      "owner": "tbd"
+    }
   }
 }
